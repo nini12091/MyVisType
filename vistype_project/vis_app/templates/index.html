@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container col-xxl-8 px-1 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="/static/img/vis_img(index).png" class="d-block mx-lg-auto img-fluid" width="700" height="500" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-6 fw-bold lh-1 mb-5">My Visualization Type</h1>
+        <p class="lead mb-5">My Type Vis 는 사용자의 데이터 시각화 분석 선호도를 테스트 하기 위해 개발되었습니다. 테스트는 데이터 시각화 테스트 문제 24개와 시각화 분석 선호도의 시각화 8개에 대한 12개 문제로 구성되어 있습니다.</p>
+        <p class="lead mb-4" style="font-size: 15px;">* 시각화 테스트 문제는 시간이 측정되고 있으니 문제를 완료하시면 다음 버튼을 ‘바로’ 눌러주시길 바랍니다.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          {% if user.is_authenticated %}
+          <button type="button" class="btn btn-lg px-4 me-md-2" style="background-color: mediumturquoise; color: white;">테스트 시작하기</button>
+          {% else %}
+          <a type="button" class="btn btn-lg px-4 me-md-2" href="users/login" style="background-color: mediumturquoise; color: white;">로그인 하러가기</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
