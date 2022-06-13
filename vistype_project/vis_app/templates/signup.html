@@ -15,10 +15,11 @@
   
                   <form class="mx-1 mx-md-4" method="POST" action="{% url 'user:signup' %}">
                     {% csrf_token %}
+                    {% include "form_errors.html" %}
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" id="username" name="username" class="form-control">
+                        <input type="text" id="username" name="username" class="form-control" value="{{ form.username.value|default_if_none:''}}">
                         <label class="form-label" for="username">사용자 이름</label>
                       </div>
                     </div>
@@ -26,7 +27,7 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="password1" name="password1" class="form-control" placeholder="9자리 이상 조합의 비밀번호 입력"/>
+                        <input type="password" id="password1" name="password1" class="form-control" placeholder="8자리 이상 조합의 비밀번호 입력" value="{{ form.password1.value|default_if_none:''}}">
                         <label class="form-label" for="password" placeholder="Password">비밀번호</label>
                       </div>
                     </div>
@@ -34,7 +35,7 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="password2" name="password2" class="form-control" placeholder="9자리 이상 조합의 비밀번호 입력" />
+                        <input type="password" id="password2" name="password2" class="form-control" placeholder="8자리 이상 조합의 비밀번호 입력" value="{{ form.password2.value|default_if_none:''}}">
                         <label class="form-label" for="password">비밀번호 확인</label>
                       </div>
                     </div>
@@ -42,7 +43,7 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="email" id="email" name="email" class="form-control"/>
+                        <input type="email" id="email" name="email" class="form-control" value="{{ form.email.value|default_if_none:''}}" />
                         <label class="form-label" for="email">이메일</label>
                       </div>
                     </div>
