@@ -2,7 +2,55 @@
 
 {% block content %}
 {% load static %}
-<div id="stack_bar"></div>
-    <script src="{% static 'js/stack_bar.js' %}"></script>
+<div class="container">
+    <div class="notice">
+        <p class="lead" style="margin-top: 1rem;">* 시각화 테스트 문제는 시간이 측정되고 있으니 문제를 완료하시면 다음 버튼을 '<span style="color: orangered;">바로</span>’ 눌러주시길 바랍니다.</p>
+    </div>
+    <div class="chart-content">
+        <h2 class="chart-title">
+            {{ test_detail.v_title }}
+        </h2>
+        <div id="stack100" class="chart" ></div>
+            <script src="{% static 'js/100%.js' %}"></script>
+        </div>
+    </div>
+    <div class="quiz-content">
+        <div class="answer-content">
+          <h3 class="quiz-title"> 
+            {{ test_detail.test_id}}번. 
+            {{ test_detail.title }}
+          </h3>
+          <form action="{% url 'vis_app:test' next_test_id %}" method="POST">
+            {% csrf_token %}
+            <div class="answer-list">
+              <div class="answer-set">
+                <input type="radio" name="answer" class="answer-radio" id="answer1" value="{{ test_detail.examples_1 }}" required/>
+                <label for="answer1" class="answer-label">{{ test_detail.examples_1 }}</label>
+              </div>
+              <div class="answer-set">
+                <input type="radio" name="answer" class="answer-radio" id="answer2" value="{{ test_detail.examples_2 }}" /> 
+                <label for="answer2" class="answer-label">{{ test_detail.examples_2 }}</label>
+              </div>
+              {% if test_detail.examples_3 != null %}
+              <div class="answer-set">
+                <input type="radio" name="answer" class="answer-radio" id="answer3" value="{{ test_detail.examples_3 }}" /> 
+                <label for="answer3" class="answer-label">{{ test_detail.examples_3 }}</label>
+              </div>
+              {% endif %}
+              {% if test_detail.examples_4 != null %}
+              <div class="answer-set">
+                <input type="radio" name="answer" class="answer-radio" id="answer4" value="{{ test_detail.examples_4 }}" />
+                <label for="answer4" class="answer-label">{{ test_detail.examples_4 }}</label>
+              </div>
+              {% endif %}
+              <div class="answer-set">
+                <input type="radio" name="answer" class="answer-radio" id="answer-skip" />
+                <label for="answer-skip" class="answer-label">넘어가기</label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-lg px-5 me-md-2" style="background-color: mediumturquoise; color: white; margin-left: 1rem;">다음 문제 &raquo;</button>
+          </form>
+        </div>
+      </div>
 </div>
 {% endblock %}

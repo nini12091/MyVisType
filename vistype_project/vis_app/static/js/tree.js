@@ -77,14 +77,4 @@ svg
 .attr("font-size", "17px")
 .attr("fill", "black")
 
-// Add title for the 6 groups
-svg
-.append("text")
-.attr("x", 7)
-.attr("y", 10)    
-.text("각 국가의 식품별 소비 현황")
-.attr("font-size", "20px")
-.attr("fill",  "black" )
-.style("font-weight", "bold")
-
 })

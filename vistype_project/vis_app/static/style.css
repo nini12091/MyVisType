@@ -1,0 +1,128 @@
+.notice{
+    padding-left: 1rem; 
+    padding-top: 1rem;
+}
+@media ( max-width: 600px ) {
+    .notice{
+        padding-left: 1rem;
+        padding-top: 1rem;
+        padding-right: 1rem;
+    }
+  }
+
+/* test */
+.chart-content {
+  float: left;
+  width: 55%;
+}
+
+@media ( max-width: 600px ) {
+  .chart-content {
+    float: left;
+    width: auto;
+  }
+}
+
+.chart-title {
+  padding: 20px 20px 0 50px;
+  font-weight: 500;
+  font-size: 1.8rem;
+  letter-spacing: -1px;
+}
+@media ( max-width: 600px ) {
+  .chart-title {
+    padding: 10px 0px 0 20px;
+    font-weight: 500;
+    font-size: 1.8rem;
+    letter-spacing: -1px;
+  }
+}
+.chart {
+  width: 100%;
+  height: 480px;
+}
+.quiz-content {
+  float: left;
+  width: auto;
+  padding-top: 50px;
+  padding-left: 1rem;
+}
+@media ( max-width: 600px ) {
+  .quiz-content {
+    float: left;
+    width: auto;
+    padding-top: 20px;
+    padding-left: 1rem;
+  }
+}
+.answer-content {
+  width: 100%;
+  height: 90%;
+}
+.quiz-title {
+  height: 40px;
+  font-weight: 400;
+  font-size: 1.6rem;
+  letter-spacing: -1px;
+  max-width: 600px;
+}
+@media ( max-width: 600px ) {
+  .quiz-title {
+    height: 20px;
+    font-weight: 400;
+    font-size: 1.6rem;
+    letter-spacing: -1px;
+    max-width: 600px;
+    padding: 0px 0px 0 20px;
+  }
+}
+.answer-list {
+  padding: 0px 0px 45px 0px;
+}
+
+@media ( max-width: 600px ) {
+  .answer-list {
+    padding: 20px 0px 20px 0px;
+  }
+}
+.answer-set {
+  height: 50px;
+  font-size: 1.3rem;
+  padding: 35px 20px;
+}
+@media ( max-width: 600px ) {
+  .answer-set {
+    height: 30px;
+    font-size: 1.3rem;
+    padding: 20px 40px;
+    margin-top: 1rem;
+  }
+}
+.answer-lable {
+  color: #000000;
+}
+.answer-label:hover {
+  color: #999999;
+}
+.next-form-btn {
+  padding: 20px 200px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 2rem;
+  background: transparent;
+  color: #000000;
+  cursor: pointer;
+}
+
+@media ( max-width: 600px ) {
+  .next-form-btn {
+    margin: 20px 10px 10px 50px;
+    padding: 10px 80px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 1.8rem;
+    background: transparent;
+    color: #000000;
+    cursor: pointer;
+  }
+}

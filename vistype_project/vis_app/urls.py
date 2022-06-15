@@ -5,5 +5,5 @@ app_name = 'vis_app'
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('test/',views.test, name="test"),
+    path('test/<int:test_id>/',views.test, name="test"),
 ]
