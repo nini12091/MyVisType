@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
 var margin = {top: 30, right: 70, bottom: 70, left: 70},
   width = 600 - margin.left - margin.right,
-  height = 400 - margin.top - margin.bottom;
+  height = 470 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg10 = d3.select("#type_100")
@@ -110,7 +110,7 @@ svg10.append("text")
 
 // Add X axis name
 svg10.append("text")
-  .attr("y", 365 + margin.bottom)
+  .attr("y", margin.bottom + 330)
   .attr("x",(width / 2))
   .attr("dy", "1em") 
   .attr("font-size", "15px")

@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
 var margin = 30
-width = 500
-height = 500
+width = 300
+height = 300
 
 var radius = Math.min(width, height) / 2 - margin
 

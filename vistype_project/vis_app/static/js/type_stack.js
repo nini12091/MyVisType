@@ -81,7 +81,7 @@ var subgroupitem = svg.selectAll(".subgroupitem")
 
 // 색상 모형
 subgroupitem.append("rect")
-  .attr("x", width - 15)
+  .attr("x", width - 7)
   .attr("y", 4)
   .attr("width", 15)
   .attr("height", 15)
@@ -89,7 +89,7 @@ subgroupitem.append("rect")
 
 //색상 text
 subgroupitem.append("text")
-  .attr("x", width + 5)
+  .attr("x", width + 12)
   .attr("y", 10)
   .attr("font-size", "13px")
   .attr("dy", ".55em")
@@ -98,7 +98,7 @@ subgroupitem.append("text")
 
 // Add X axis name
 svg.append("text")
-  .attr("y", 360 + margin.bottom)
+  .attr("y", margin.bottom + 330)
   .attr("x",(width / 2))
   .attr("dy", "1em") 
   .attr("font-size", "15px")
