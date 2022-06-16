@@ -1,16 +1,16 @@
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 10, bottom: 30, left: 10},
-  width = 600 - margin.left - margin.right,
-  height = 470 - margin.top - margin.bottom;
+var margin_tree = {top: 0, right: 10, bottom: 30, left: 0},
+  width_tree = 670 - margin_tree.left - margin_tree.right,
+  height_tree = 470 - margin_tree.top - margin_tree.bottom;
 
 // append the svg object to the body of the page
 var svg2 = d3.select("#type_tree")
 .append("svg")
-.attr("width", width + margin.left + margin.right)
-.attr("height", height + margin.top + margin.bottom)
+.attr("width", width_tree + margin_tree.left + margin_tree.right)
+.attr("height", height_tree + margin_tree.top + margin_tree.bottom)
 .append("g")
 .attr("transform",
-    "translate(" + margin.left + "," + margin.top + ")");
+    "translate(" + margin_tree.left + "," + margin_tree.top + ")");
 
 // read json data
 d3.json("https://raw.githubusercontent.com/nini12091/myvistype_data/main/Treemap(type).json", function(data) {
@@ -20,7 +20,7 @@ var root = d3.hierarchy(data).sum(function(d){ return d.value})
 
 // Then d3.treemap computes the position of each element of the hierarchy
 d3.treemap()
-.size([width, height])
+.size([width_tree, height_tree])
 .paddingTop(18)
 .paddingRight(3)
 .paddingLeft(3)
@@ -77,14 +77,14 @@ svg2
 .attr("font-size", "17px")
 .attr("fill", "black")
 
-// Add title for the 6 groups
-svg2
-.append("text")
-.attr("x", 7)
-.attr("y", 10)    
-.text("각 국가의 사망원인별 사망 수")
-.attr("font-size", "20px")
-.attr("fill",  "black" )
-.style("font-weight", "bold")
+// // Add title for the 6 groups
+// svg2
+// .append("text")
+// .attr("x", 7)
+// .attr("y", 10)    
+// .text("각 국가의 사망원인별 사망 수")
+// .attr("font-size", "20px")
+// .attr("fill",  "black" )
+// .style("font-weight", "bold")
 
 })

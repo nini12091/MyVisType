@@ -19,7 +19,7 @@ def test(request, test_id):
             test = Vis_test.objects.get(pk=request.session['test_id'])
             answer = Answer()
             answer.answer_id = str(str(request.session['test_id']) + str(request.user))
-            answer.user_id = request.user
+            answer.user_id = request.user.username
             answer.test_id = test.test_id
             answer.v_type = test.v_type
             answer.v_task = test.v_task
@@ -31,6 +31,7 @@ def test(request, test_id):
                 answer.status = False
             
             answer.time = result_time
+            answer.save()
             return HttpResponseRedirect(reverse('vis_app:test', args=(test_id,)))
 
         else:
@@ -49,7 +50,7 @@ def test(request, test_id):
             test = Vis_test.objects.get(pk=request.session['test_id'])
             answer = Answer()
             answer.answer_id = str(str(request.session['test_id']) + str(request.user))
-            answer.user_id = request.user
+            answer.user_id = request.user.username
             answer.test_id = test.test_id
             answer.v_type = test.v_type
             answer.v_task = test.v_task
@@ -61,6 +62,7 @@ def test(request, test_id):
                 answer.status = False
             
             answer.time = result_time
+            answer.save()
             return HttpResponseRedirect(reverse('vis_app:test', args=(test_id,)))
 
         else:
@@ -79,7 +81,7 @@ def test(request, test_id):
             test = Vis_test.objects.get(pk=request.session['test_id'])
             answer = Answer()
             answer.answer_id = str(str(request.session['test_id']) + str(request.user))
-            answer.user_id = request.user
+            answer.user_id = request.user.username
             answer.test_id = test.test_id
             answer.v_type = test.v_type
             answer.v_task = test.v_task
@@ -91,6 +93,7 @@ def test(request, test_id):
                 answer.status = False
             
             answer.time = result_time
+            answer.save()
             return HttpResponseRedirect(reverse('vis_app:test', args=(test_id,)))
 
         else:
@@ -109,7 +112,7 @@ def test(request, test_id):
             test = Vis_test.objects.get(pk=request.session['test_id'])
             answer = Answer()
             answer.answer_id = str(str(request.session['test_id']) + str(request.user))
-            answer.user_id = request.user
+            answer.user_id = request.user.username
             answer.test_id = test.test_id
             answer.v_type = test.v_type
             answer.v_task = test.v_task
@@ -121,6 +124,7 @@ def test(request, test_id):
                 answer.status = False
             
             answer.time = result_time
+            answer.save()
             return HttpResponseRedirect(reverse('vis_app:test', args=(test_id,)))
 
         else:
@@ -139,7 +143,7 @@ def test(request, test_id):
             test = Vis_test.objects.get(pk=request.session['test_id'])
             answer = Answer()
             answer.answer_id = str(str(request.session['test_id']) + str(request.user))
-            answer.user_id = request.user
+            answer.user_id = request.user.username
             answer.test_id = test.test_id
             answer.v_type = test.v_type
             answer.v_task = test.v_task
@@ -151,6 +155,7 @@ def test(request, test_id):
                 answer.status = False
             
             answer.time = result_time
+            answer.save()
             return HttpResponseRedirect(reverse('vis_app:test', args=(test_id,)))
 
         else:
@@ -162,14 +167,14 @@ def test(request, test_id):
             context = {'next_test_id':next_test_id, 'test_detail':test_detail}
             return render(request, 'test/test_tree.html', context)
 
-    elif test_id == 18:
+    elif 17 < test_id <= 19:
         if request.method == "POST":
             termiate_time = time.time()
             result_time = int (termiate_time - request.session['start_time'])
             test = Vis_test.objects.get(pk=request.session['test_id'])
             answer = Answer()
             answer.answer_id = str(str(request.session['test_id']) + str(request.user))
-            answer.user_id = request.user
+            answer.user_id = request.user.username
             answer.test_id = test.test_id
             answer.v_type = test.v_type
             answer.v_task = test.v_task
@@ -181,7 +186,12 @@ def test(request, test_id):
                 answer.status = False
             
             answer.time = result_time
-            return HttpResponseRedirect(reverse('vis_app:test', args=(test_id,)))
+            answer.save()
+            
+            if test_id == 19:
+                return HttpResponseRedirect(reverse('vis_app:type', args=(1,)))
+            else:
+                return HttpResponseRedirect(reverse('vis_app:test', args=(test_id,)))
 
         else:
             request.session['test_id'] = test_id
@@ -192,27 +202,28 @@ def test(request, test_id):
             context = {'next_test_id':next_test_id, 'test_detail':test_detail}
             return render(request, 'test/test_end.html', context)
     else:
-       return HttpResponseRedirect(reverse('vis_app:type'))
+       return HttpResponseRedirect(reverse('vis_app:type', args=(1,)))
 
 def type(request, vis_id):
     if vis_id <= 4:
         if request.method == "POST":
-                termiate_time = time.time()
-                result_time = int (termiate_time - request.session['start_time'])
-                print(result_time)
-                vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
-                choice = Choice()
-                choice.choice_id = str(str(request.session['vis_id']) + str(request.user))
-                choice.user_id = request.user
-                choice.set_number = vis_choice_test.set_number
-                select = request.POST.get('option-list','')
-                if select == 'option1':
-                    choice.choice_type = vis_choice_test.vis_1
-                else:
-                    choice.choice_type = vis_choice_test.vis_2
-                choice.v_task = vis_choice_test.v_task
-                choice.time = result_time
-                return HttpResponseRedirect(reverse('vis_app:type', args=(vis_id,)))
+            termiate_time = time.time()
+            result_time = int (termiate_time - request.session['start_time'])
+            print(result_time)
+            vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
+            choice = Choice()
+            choice.choice_id = str(str(request.session['vis_id']) + str(request.user))
+            choice.user_id = request.user.username
+            choice.set_number = vis_choice_test.set_number
+            select = request.POST.get('option-list','')
+            if select == 'option1':
+                choice.choice_type = vis_choice_test.vis_1
+            else:
+                choice.choice_type = vis_choice_test.vis_2
+            choice.v_task = vis_choice_test.v_task
+            choice.time = result_time
+            choice.save()
+            return HttpResponseRedirect(reverse('vis_app:type', args=(vis_id,)))
         else:
             request.session['vis_id'] = vis_id
             start_time = time.time()
@@ -224,22 +235,23 @@ def type(request, vis_id):
 
     elif 4 < vis_id <= 8:
         if request.method == "POST":
-                termiate_time = time.time()
-                result_time = int (termiate_time - request.session['start_time'])
-                print(result_time)
-                vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
-                choice = Choice()
-                choice.choice_id = str(str(request.session['vis_id']) + str(request.user))
-                choice.user_id = request.user
-                choice.set_number = vis_choice_test.set_number
-                select = request.POST.get('option-list','')
-                if select == 'option1':
-                    choice.choice_type = vis_choice_test.vis_1
-                else:
-                    choice.choice_type = vis_choice_test.vis_2
-                choice.v_task = vis_choice_test.v_task
-                choice.time = result_time
-                return HttpResponseRedirect(reverse('vis_app:type', args=(vis_id,)))
+            termiate_time = time.time()
+            result_time = int (termiate_time - request.session['start_time'])
+            print(result_time)
+            vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
+            choice = Choice()
+            choice.choice_id = str(str(request.session['vis_id']) + str(request.user))
+            choice.user_id = request.user.username
+            choice.set_number = vis_choice_test.set_number
+            select = request.POST.get('option-list','')
+            if select == 'option1':
+                choice.choice_type = vis_choice_test.vis_1
+            else:
+                choice.choice_type = vis_choice_test.vis_2
+            choice.v_task = vis_choice_test.v_task
+            choice.time = result_time
+            choice.save()
+            return HttpResponseRedirect(reverse('vis_app:type', args=(vis_id,)))
         else:
             request.session['vis_id'] = vis_id
             start_time = time.time()
@@ -249,23 +261,27 @@ def type(request, vis_id):
             context = {'next_vis_id':next_vis_id, 'type_detail':type_detail}
             return render(request, 'type/type_stack_pie.html', context)
 
-    elif 8 < vis_id <= 12: 
+    elif 8 < vis_id <= 13: 
         if request.method == "POST":
-                termiate_time = time.time()
-                result_time = int (termiate_time - request.session['start_time'])
-                print(result_time)
-                vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
-                choice = Choice()
-                choice.choice_id = str(str(request.session['vis_id']) + str(request.user))
-                choice.user_id = request.user
-                choice.set_number = vis_choice_test.set_number
-                select = request.POST.get('option-list','')
-                if select == 'option1':
-                    choice.choice_type = vis_choice_test.vis_1
-                else:
-                    choice.choice_type = vis_choice_test.vis_2
-                choice.v_task = vis_choice_test.v_task
-                choice.time = result_time
+            termiate_time = time.time()
+            result_time = int (termiate_time - request.session['start_time'])
+            print(result_time)
+            vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
+            choice = Choice()
+            choice.choice_id = str(str(request.session['vis_id']) + str(request.user))
+            choice.user_id = request.user.username
+            choice.set_number = vis_choice_test.set_number
+            select = request.POST.get('option-list','')
+            if select == 'option1':
+                choice.choice_type = vis_choice_test.vis_1
+            else:
+                choice.choice_type = vis_choice_test.vis_2
+            choice.v_task = vis_choice_test.v_task
+            choice.time = result_time
+            choice.save()
+            if vis_id == 13:
+                return HttpResponseRedirect(reverse('vis_app:finish'))
+            else:
                 return HttpResponseRedirect(reverse('vis_app:type', args=(vis_id,)))
         else:
             request.session['vis_id'] = vis_id
@@ -274,7 +290,11 @@ def type(request, vis_id):
             next_vis_id = vis_id + 1
             type_detail = get_object_or_404(Vis_Choice_Test, pk=vis_id)
             context = {'next_vis_id':next_vis_id, 'type_detail':type_detail}
-            return render(request, 'type/type_stack_bar.html', context)
+            return render(request, 'type/type_stack_tree.html', context)
 
     else:
-        return render(request, 'index.html', context)
+       return HttpResponseRedirect(reverse('vis_app:finish'))
+
+def finish(request):
+
+    return render(request, 'finish.html')
