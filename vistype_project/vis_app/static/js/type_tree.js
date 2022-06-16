@@ -4,7 +4,7 @@ var margin = {top: 10, right: 10, bottom: 30, left: 10},
   height = 500 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#type_tree")
+var svg2 = d3.select("#type_tree")
 .append("svg")
 .attr("width", width + margin.left + margin.right)
 .attr("height", height + margin.top + margin.bottom)
@@ -38,7 +38,7 @@ var opacity = d3.scaleLinear()
 .range([.3,3])  
 
 // use this information to add rectangles:
-svg
+svg2
 .selectAll("rect")
 .data(root.leaves())
 .enter()
@@ -53,7 +53,7 @@ svg
 
 
 // and to add the text labels
-svg
+svg2
 .selectAll("text")
 .data(root.leaves())
 .enter()
@@ -65,7 +65,7 @@ svg
 .attr("fill", "black")
 
 // Add title for the 6 groups
-svg
+svg2
 .selectAll("titles")
 .data(root.descendants().filter(function(d){return d.depth==1}))
 .enter()
@@ -78,7 +78,7 @@ svg
 .attr("fill", "black")
 
 // Add title for the 6 groups
-svg
+svg2
 .append("text")
 .attr("x", 7)
 .attr("y", 10)    

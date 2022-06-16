@@ -14,13 +14,13 @@
 <div class="container">
     <div class="notice">
         <p class="lead" style="margin-top: 1rem;">* 시각화 테스트 문제는 시간이 측정되고 있으니 문제를 완료하시면 다음 버튼을 '<span style="color: orangered;">바로</span>’ 눌러주시길 바랍니다.</p>
-    </div>
+      </div>
     <div class="chart-content">
         <h2 class="chart-title">
             {{ test_detail.v_title }}
         </h2>
-        <div id="stack_bar" class="chart" ></div>
-            <script src="{% static 'js/stack_bar.js' %}"></script>
+        <div id="tree" class="chart" ></div>
+            <script src="{% static 'js/tree.js' %}"></script>
         </div>
     </div>
     <div class="quiz-content">
@@ -57,7 +57,10 @@
                 <label for="answer-skip" class="answer-label">넘어가기</label>
               </div>
             </div>
-            <button type="submit" class="btn btn-lg px-5 me-md-2" style="background-color: dimgray; color: white; margin-left: 1rem;">다음 문제 &raquo;</button>
+            <div class="notice">
+              <p class="lead" style="margin-top: 1rem; font-size: 1rem;">* 마지막 시각화 테스트 문제입니다. </br>완료하기 버튼을 누르시면 '시각화 Type을 선택하는 페이지'로 넘어갑니다.</p>
+            </div>
+            <button type="submit" class="btn btn-lg px-5 me-md-2" style="background-color: dimgray; color: white; margin-left: 1rem;">완료하기 &raquo;</button>
           </form>
         </div>
       </div>

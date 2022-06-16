@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+<!-- 뒤로 넘어가기 안되게 하는 기능 -->
+{% block fcback %}
+    <script type="text/javascript">
+        function disableBack() { window.history.forward(); }
+        setTimeout("disableBack()", 0);
+        window.onunload = function () { null };
+    </script> 
+{% endblock %}
+
 {% block content %}
 {% load static %}
 <div class="container">
@@ -48,7 +57,7 @@
                 <label for="answer-skip" class="answer-label">넘어가기</label>
               </div>
             </div>
-            <button type="submit" class="btn btn-lg px-5 me-md-2" style="background-color: mediumturquoise; color: white; margin-left: 1rem;">다음 문제 &raquo;</button>
+            <button type="submit" class="btn btn-lg px-5 me-md-2" style="background-color: dimgray; color: white; margin-left: 1rem;">다음 문제 &raquo;</button>
           </form>
         </div>
       </div>

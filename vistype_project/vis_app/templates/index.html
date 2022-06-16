@@ -11,9 +11,9 @@
         <p class="lead mb-4" style="font-size: 15px;">* 시각화 테스트 문제는 시간이 측정되고 있으니 문제를 완료하시면 다음 버튼을 ‘바로’ 눌러주시길 바랍니다.</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
           {% if user.is_authenticated %}
-          <a type="button" class="btn btn-lg px-4 me-md-2" href="/test/1/" style="background-color: mediumturquoise; color: white;">테스트 시작하기</a>
+          <a type="button" class="btn btn-lg px-4 me-md-2" href="/test/1/" style="background-color: lightblue; color: white;">테스트 시작하기</a>
           {% else %}
-          <a type="button" class="btn btn-lg px-4 me-md-2" href="{% url 'user:user_login' %}" style="background-color: mediumturquoise; color: white;">로그인 하러가기</a>
+          <a type="button" class="btn btn-lg px-4 me-md-2" href="{% url 'user:user_login' %}" style="background-color: lightblue; color: white;">로그인 하러가기</a>
           {% endif %}
         </div>
       </div>

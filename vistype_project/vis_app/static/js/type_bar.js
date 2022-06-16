@@ -1,10 +1,10 @@
 // set the dimensions and margins of the graph
 var margin = {top: 30, right: 70, bottom: 70, left: 70},
-  width = 700 - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom;
+  width = 600 - margin.left - margin.right,
+  height = 470 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#type_bar")
+var svg1 = d3.select("#type_bar")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -28,7 +28,7 @@ var x = d3.scaleBand()
     .domain(countrys)
     .range([0, width])
     .padding([0.1])
-svg.append("g")
+svg1.append("g")
   .attr("transform", "translate(0," + height + ")")
   .call(d3.axisBottom(x).tickSizeOuter(0))
   .attr("font-size", "14px");
@@ -37,7 +37,7 @@ svg.append("g")
 var y = d3.scaleLinear()
   .domain([0, 320])
   .range([ height, 0 ]);
-svg.append("g")
+svg1.append("g")
   .call(d3.axisLeft(y))
   .attr("font-size", "14px");
 
@@ -54,7 +54,7 @@ function make_y_gridlines() {
 }
 
 // add the Y gridlines
-svg.append("g")			
+svg1.append("g")			
   .attr("class", "grid")
   .attr('fill','none')
   .attr('stroke', '#DCDCDC')
@@ -65,7 +65,7 @@ svg.append("g")
       .tickFormat("")
   )
 // Add X axis name
-svg.append("text")
+svg1.append("text")
   .attr("x", width - 70)
   .attr("y", margin.top - 38)
   .attr("font-size", "12px")
@@ -77,7 +77,7 @@ var color = d3.scaleOrdinal()
     .range(['#CC79A7','#E69F00','#009E73','#0072B2'])
 
 // 색상 정보
-var subgroupitem = svg.selectAll(".subgroupitem")
+var subgroupitem = svg1.selectAll(".subgroupitem")
   .data(data.columns.slice(1).reverse())
   .enter().append("g")
         .attr("class", "subgroupitem")
@@ -101,8 +101,8 @@ subgroupitem.append("text")
   .text(function(d) { return d; });
 
 // Add X axis name
-svg.append("text")
-  .attr("y", 365 + margin.bottom)
+svg1.append("text")
+  .attr("y", margin.bottom + 330)
   .attr("x",(width / 2))
   .attr("dy", "1em") 
   .attr("font-size", "15px")
@@ -110,17 +110,17 @@ svg.append("text")
   .text("국가명");
 
 // Add Y axis name
-svg.append("text")
+svg1.append("text")
   .attr('transform','rotate(-90)')
   .attr("y", 20 - margin.left)
   .attr("x",0 - (height / 2))
   .attr("dy", "1em") 
   .attr("font-size", "15px")
   .style("text-anchor", "middle")
-  .text("사망 수");
+  .text("사망자 수");
 
   // Show the bars
-svg.append("g")
+svg1.append("g")
     .selectAll("g")
     // Enter in data = loop group per group
     .data(data)

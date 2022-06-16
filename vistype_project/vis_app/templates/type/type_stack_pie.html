@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+<!-- 뒤로 넘어가기 안되게 하는 기능 -->
+{% block fcback %}
+    <script type="text/javascript">
+        function disableBack() { window.history.forward(); }
+        setTimeout("disableBack()", 0);
+        window.onunload = function () { null };
+    </script> 
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="p-4 mb-4 rounded-4 type-content" style="margin-top: 2rem; border: 3px solid; border-color: gainsboro;">
+        <p class="lead mb-2" style="text-align: center; color: black; font-size: 1rem;">아래의 질문을 읽고 두개의 시각화 중 어떤 시각화가 정답을 찾기 쉬운지 선택해주세요.</p>
+        <p class="lead mb-2" style="text-align: center; color: black; font-weight: 400;">Q. {{type_detail.v_question}} 찾기</p>
+    </div>
+    <h5 class="title" style="margin-left: 3rem; margin-top: 3rem;">
+        {{type_detail.vis_title}}
+    </h5>
+    <form action="{% url 'vis_app:type' next_vis_id %}" method="POST">
+        {% csrf_token %}
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6" >
+                <div id="type_100" class="type-vis1">
+                    <script src="{% static 'js/type_100.js' %}"></script>
+                    <p class="lead mb-2 rounded-3 selct-option">
+                        <label><input type="radio" name="option-list" value="option1" required>&nbsp;&nbsp;&nbsp;{{type_detail.vis_1}} 선택</label>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6" >
+                <div id="type_bar" class="type-vis2">
+                    <script src="{% static 'js/type_bar.js' %}"></script>
+                    <p class="lead mb-2 rounded-3 selct-option">
+                        <label><input type="radio" name="option-list" value="option2">&nbsp;&nbsp;&nbsp;{{type_detail.vis_2}} 선택 </label>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="d-grid col-4 mx-auto" style="text-align: center; margin-top: 3rem;">
+            <button type="submit" class="btn btn-lg btn-option">다음 &raquo;</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

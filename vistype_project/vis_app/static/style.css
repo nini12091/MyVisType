@@ -126,3 +126,38 @@
     cursor: pointer;
   }
 }
+
+/* type */
+.selct-option {
+  text-align: center; 
+  border: 3px solid; 
+  border-color: gainsboro;
+  margin-left: 6rem; 
+  margin-right: 10rem;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+@media ( max-width: 600px ) {
+  .selct-option {
+    text-align: center; 
+    border: 3px solid; 
+    border-color: gainsboro;
+    margin-left: 0; 
+    margin-right: 0;
+  }
+}
+
+.btn-option{
+  background-color: darkgray; 
+  color: white; 
+  margin-left: 1rem;
+}
+
+@media ( max-width: 600px ) {
+  .btn-option{
+    background-color: darkgray; 
+    color: white; 
+    margin-left: 0;
+  }
+}

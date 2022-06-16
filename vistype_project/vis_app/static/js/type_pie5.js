@@ -5,7 +5,7 @@ height = 500
 
 var radius = Math.min(width, height) / 2 - margin
 
-var svg = d3.select("#type_pie5")
+var svg8 = d3.select("#type_pie5")
 .append("svg")
 .attr("width", width)
 .attr("height", height)
@@ -35,16 +35,16 @@ return d;
 }, function(error, data){
 if (error) throw error;
 
-var arc = svg.selectAll(".arc")
+var arc5 = svg8.selectAll(".arc")
   .data(pie(data))
   .enter().append("g")
     .attr("class", "arc");
 
-arc.append("path")
+arc5.append("path")
     .attr("d", path)
     .attr("fill", function(d) { return color(d.data.질병); })
 
-arc.append("text")
+arc5.append("text")
     .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
     .attr("dx", "-1em")
     .attr("font-size", "18px")
