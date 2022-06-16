@@ -1,16 +1,16 @@
 // set the dimensions and margins of the graph
-var margin = 30
-width = 690
-height = 500
+var margin_pie1 = 30
+width_pie1 = 200
+height_pie1 = 200
 
-var radius = Math.min(width, height) / 2 - margin
+var radius = Math.min(width_pie1, height_pie1) / 2 - margin_pie1
 
 var svg5 = d3.select("#type_pie2")
 .append("svg")
-.attr("width", width)
-.attr("height", height)
+.attr("width", width_pie1)
+.attr("height", height_pie1)
 .append("g")
-.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+.attr("transform", "translate(" + width_pie1 / 2 + "," + height_pie1 / 2 + ")");
 
 var color = d3.scaleOrdinal(['#0072B2','#009E73','#E69F00','#CC79A7']);
 
@@ -47,7 +47,7 @@ arc2.append("path")
 arc2.append("text")
     .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
     .attr("dx", "-1em")
-    .attr("font-size", "18px")
+    .attr("font-size", "13px")
     .attr("dy", "0.5em")
     .text(function(d) { return d.data.질병; });
   

@@ -1,15 +1,15 @@
 // set the dimensions and margins of the graph
 var margin = {top: 30, right: 70, bottom: 70, left: 70},
-  width = 600 - margin.left - margin.right,
-  height = 470 - margin.top - margin.bottom;
+  width = 500 - margin.left - margin.right,
+  height = 370 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg10 = d3.select("#type_100")
-.append("svg")
-.attr("width", width + margin.left + margin.right)
-.attr("height", height + margin.top + margin.bottom)
-.append("g")
-.attr("transform",
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
       "translate(" + margin.left + "," + margin.top + ")"); 
 
 d3.csv("https://raw.githubusercontent.com/nini12091/myvistype_data/main/100%25_Stacked_Bar_Chart2(type).csv", 
@@ -120,7 +120,7 @@ svg10.append("text")
 // Add Y axis name
 svg10.append("text")
   .attr('transform','rotate(-90)')
-  .attr("y", 20 - margin.left)
+  .attr("y", 10 - margin.left)
   .attr("x",0 - (height / 2))
   .attr("dy", "1em") 
   .attr("font-size", "15px")
