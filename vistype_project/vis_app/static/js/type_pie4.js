@@ -1,9 +1,9 @@
 // set the dimensions and margins of the graph
-var margin = 30
+var margin_pie1 = 30
 width_pie1 = 200
 height_pie1 = 200
 
-var radius = Math.min(width_pie1, height_pie1) / 2 - margin
+var radius = Math.min(width_pie1, height_pie1) / 2 - margin_pie1
 
 var svg7 = d3.select("#type_pie4")
 .append("svg")
