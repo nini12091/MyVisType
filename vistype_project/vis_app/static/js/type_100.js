@@ -1,16 +1,16 @@
 // set the dimensions and margins of the graph
-var margin = {top: 30, right: 70, bottom: 70, left: 70},
-  width = 500 - margin.left - margin.right,
-  height = 370 - margin.top - margin.bottom;
+var margin_100 = {top: 30, right: 70, bottom: 70, left: 70},
+  width_100 = 500 - margin_100.left - margin_100.right,
+  height_100 = 330 - margin_100.top - margin_100.bottom;
 
 // append the svg object to the body of the page
 var svg10 = d3.select("#type_100")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-      "translate(" + margin.left + "," + margin.top + ")"); 
+.append("svg")
+.attr("width", width_100 + margin_100.left + margin_100.right)
+.attr("height", height_100 + margin_100.top + margin_100.bottom)
+.append("g")
+.attr("transform",
+      "translate(" + margin_100.left + "," + margin_100.top + ")"); 
 
 d3.csv("https://raw.githubusercontent.com/nini12091/myvistype_data/main/100%25_Stacked_Bar_Chart2(type).csv", 
 
@@ -23,17 +23,17 @@ var countrys = d3.map(data, function(d){return(d.country)}).keys()
 // Add X axis
 var x = d3.scaleBand()
     .domain(countrys)
-    .range([0, width])
+    .range([0, width_100])
     .padding([0.1])
 svg10.append("g")
-  .attr("transform", "translate(0," + height + ")")
+  .attr("transform", "translate(0," + height_100 + ")")
   .call(d3.axisBottom(x).tickSizeOuter(0))
   .attr("font-size", "14px");
 
 // Add Y axis
 var y = d3.scaleLinear()
   .domain([0, 100])
-  .range([ height, 0 ]);
+  .range([ height_100, 0 ]);
 svg10.append("g")
   .call(d3.axisLeft(y))
   .attr("font-size", "14px");
@@ -52,7 +52,7 @@ svg10.append("g")
   .attr('stroke-width',0.1)
   .attr('shape-rendering','crispEdges')
   .call(make_y_gridlines()
-      .tickSize(-width)
+      .tickSize(-width_100)
       .tickFormat("")
   )
 
@@ -86,7 +86,7 @@ var subgroupitem = svg10.selectAll(".subgroupitem")
 
 // 색상 모형
 subgroupitem.append("rect")
-  .attr("x", width - 2)
+  .attr("x", width_100 - 2)
   .attr("y", 4)
   .attr("width", 15)
   .attr("height", 15)
@@ -94,7 +94,7 @@ subgroupitem.append("rect")
 
 //색상 text
 subgroupitem.append("text")
-  .attr("x", width + 17)
+  .attr("x", width_100 + 17)
   .attr("y", 10)
   .attr("font-size", "13px")
   .attr("dy", ".55em")
@@ -103,15 +103,15 @@ subgroupitem.append("text")
 
 // Add X axis name
 svg10.append("text")
-  .attr("x", width - 70)
-  .attr("y", margin.top - 38)
+  .attr("x", width_100 - 70)
+  .attr("y", margin_100.top - 38)
   .attr("font-size", "12px")
   .text("(단위 : 명 / 인구 10만명)");
 
 // Add X axis name
 svg10.append("text")
-  .attr("y", margin.bottom + 330)
-  .attr("x",(width / 2))
+  .attr("y", margin_100.bottom + 190)
+  .attr("x",(width_100 / 2))
   .attr("dy", "1em") 
   .attr("font-size", "15px")
   .style("text-anchor", "middle")
@@ -120,8 +120,8 @@ svg10.append("text")
 // Add Y axis name
 svg10.append("text")
   .attr('transform','rotate(-90)')
-  .attr("y", 10 - margin.left)
-  .attr("x",0 - (height / 2))
+  .attr("y", 20 - margin_100.left)
+  .attr("x",0 - (height_100 / 2))
   .attr("dy", "1em") 
   .attr("font-size", "15px")
   .style("text-anchor", "middle")

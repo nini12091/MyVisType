@@ -161,3 +161,25 @@
     margin-left: 0;
   }
 }
+
+.pie_raw{
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+}
+
+@media ( max-width: 600px ) {
+  .pie_raw{
+    display: -webkit-inline-box;
+  }
+}
+.selct-option-pie{
+  text-align: center; 
+  border: 3px solid; 
+  border-color: gainsboro;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  margin-top: 2rem;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

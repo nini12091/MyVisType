@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 10, bottom: 30, left: 10},
-  width = 700 - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom;
+  width = 600 - margin.left - margin.right,
+  height = 470 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg2 = d3.select("#type_tree")
