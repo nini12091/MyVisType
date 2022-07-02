@@ -66,6 +66,7 @@ class Choice(models.Model):
     set_number = models.CharField(max_length=256, verbose_name='set_number')
     choice_type = models.CharField(max_length=256, verbose_name='선호 시각화')
     v_task = models.CharField(max_length=256, verbose_name='task')
+    v_reason = models.CharField(max_length=256, verbose_name='선택이유')
     time = models.CharField(max_length=64, verbose_name='소요시간')
 
     def __str__(self):

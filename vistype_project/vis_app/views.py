@@ -221,6 +221,7 @@ def type(request, vis_id):
             else:
                 choice.choice_type = vis_choice_test.vis_2
             choice.v_task = vis_choice_test.v_task
+            choice.v_reason = request.POST.get('reason','')
             choice.time = result_time
             choice.save()
             return HttpResponseRedirect(reverse('vis_app:type', args=(vis_id,)))
@@ -249,6 +250,7 @@ def type(request, vis_id):
             else:
                 choice.choice_type = vis_choice_test.vis_2
             choice.v_task = vis_choice_test.v_task
+            choice.v_reason = request.POST.get('reason','')
             choice.time = result_time
             choice.save()
             return HttpResponseRedirect(reverse('vis_app:type', args=(vis_id,)))
@@ -277,6 +279,7 @@ def type(request, vis_id):
             else:
                 choice.choice_type = vis_choice_test.vis_2
             choice.v_task = vis_choice_test.v_task
+            choice.v_reason = request.POST.get('reason','')
             choice.time = result_time
             choice.save()
             if vis_id == 13:

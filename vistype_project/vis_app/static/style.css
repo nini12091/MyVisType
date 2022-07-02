@@ -193,3 +193,9 @@
   padding-top: 5px;
   padding-bottom: 5px;
 }
+
+@media ( max-width: 600px ) {
+  .reason1{
+    width: auto;
+  }
+}
