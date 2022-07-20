@@ -1,3 +1,7 @@
+.container{
+  max-width: 1400px;
+}
+
 .notice{
     padding-left: 1rem; 
     padding-top: 1rem;
