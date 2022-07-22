@@ -20,7 +20,28 @@
             {{ test_detail.v_title }}
         </h2>
         <div id="pie" class="chart" ></div>
-            <script src="{% static 'js/pie.js' %}"></script>
+        <div class="pie_raw">
+          <div id="type_pie1" class="type-vis1">
+              <script src="{% static 'js/type_pie1.js' %}"></script></br>
+              <p style="text-decoration: underline;">대한민국</p>
+          </div>
+          <div id="type_pie2" class="type-vis1">
+              <script src="{% static 'js/type_pie2.js' %}"></script>
+              <p style="text-decoration: underline;">독일</p>
+          </div>
+          <div id="type_pie3" class="type-vis1">
+              <script src="{% static 'js/type_pie3.js' %}"></script>
+              <p style="text-decoration: underline;">미국</p>
+          </div>
+          <div id="type_pie4" class="type-vis1">
+              <script src="{% static 'js/type_pie4.js' %}"></script>
+              <p style="text-decoration: underline;">영국</p>
+          </div>
+          <div id="type_pie5" class="type-vis1">
+              <script src="{% static 'js/type_pie5.js' %}"></script>
+              <p style="text-decoration: underline;">일본</p>
+          </div>
+      </div>
         </div>
     </div>
     <div class="quiz-content">
