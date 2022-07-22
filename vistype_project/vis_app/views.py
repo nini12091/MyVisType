@@ -209,7 +209,6 @@ def type(request, vis_id):
         if request.method == "POST":
             termiate_time = time.time()
             result_time = int (termiate_time - request.session['start_time'])
-            print(result_time)
             vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
             choice = Choice()
             choice.choice_id = str(str(request.session['vis_id']) + str(request.user))
@@ -238,7 +237,6 @@ def type(request, vis_id):
         if request.method == "POST":
             termiate_time = time.time()
             result_time = int (termiate_time - request.session['start_time'])
-            print(result_time)
             vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
             choice = Choice()
             choice.choice_id = str(str(request.session['vis_id']) + str(request.user))
@@ -267,7 +265,6 @@ def type(request, vis_id):
         if request.method == "POST":
             termiate_time = time.time()
             result_time = int (termiate_time - request.session['start_time'])
-            print(result_time)
             vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
             choice = Choice()
             choice.choice_id = str(str(request.session['vis_id']) + str(request.user))
