@@ -43,14 +43,14 @@
           </div>
       </div>
       </div>
-        <div class="pie-answer-content">
+        <div class="pie-answer-content" style="margin-top: 4rem; padding-left: 12rem;">
           <h3 class="quiz-title"> 
             {{ test_detail.test_id}}번. 
             {{ test_detail.title }}
           </h3>
           <form action="{% url 'vis_app:test' next_test_id %}" method="POST">
             {% csrf_token %}
-            <div class="pie-answer-list">
+            <div class="pie-answer-list" style="padding: 0px 0px 20px 0px;">
               <div class="answer-set">
                 <input type="radio" name="answer" class="answer-radio" id="answer1" value="{{ test_detail.examples_1 }}" required/>
                 <label for="answer1" class="answer-label">{{ test_detail.examples_1 }}</label>
