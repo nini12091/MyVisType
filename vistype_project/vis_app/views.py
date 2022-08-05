@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 import time
+import logging
 
 # Create your views here.
 
@@ -252,7 +253,7 @@ def type(request, vis_id):
             choice.v_reason = request.POST.get('reason','')
             choice.time = result_time
             choice.save()
-            request.session['prefer_id'] = request.session['prefer_id'] + 2
+            request.session['prefer_id'] = request.session['prefer_id'] + 1
             return HttpResponseRedirect(reverse('vis_app:prefer', args=(request.session['prefer_id'],)))
 
         else:
@@ -282,7 +283,7 @@ def type(request, vis_id):
             choice.v_reason = request.POST.get('reason','')
             choice.time = result_time
             choice.save()
-            request.session['prefer_id'] = request.session['prefer_id'] + 2
+            request.session['prefer_id'] = request.session['prefer_id'] + 1
             return HttpResponseRedirect(reverse('vis_app:prefer', args=(request.session['prefer_id'],)))
         else:
             request.session['vis_id'] = vis_id
@@ -311,7 +312,7 @@ def type(request, vis_id):
             choice.v_reason = request.POST.get('reason','')
             choice.time = result_time
             choice.save()
-            request.session['prefer_id'] = request.session['prefer_id'] + 2
+            request.session['prefer_id'] = request.session['prefer_id'] + 1
             return HttpResponseRedirect(reverse('vis_app:prefer', args=(request.session['prefer_id'],)))
         else:
             request.session['vis_id'] = vis_id
@@ -330,18 +331,20 @@ def prefer(request, prefer_id):
             if request.method == "POST":
                 vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
                 vis_prefer = Vis_prefer()
-                vis_prefer.vis_prefer_id = str(prefer_id + str(request.user))
+                vis_prefer.vis_prefer_id = str(str(prefer_id) + str(request.user))
                 vis_prefer.prefer_id = prefer_id
                 vis_prefer.user_id = request.user.username
                 vis_prefer.prefer = request.POST.get('option-list','')
                 vis_prefer.v_task = vis_choice_test.v_task
                 vis_prefer.vis_type = vis_choice_test.vis_1
                 vis_prefer.save()
-
-                return HttpResponseRedirect(reverse('vis_app:prefer', args=(prefer_id,)))
+                request.session['prefer_id'] = prefer_id + 1
+            
+                return HttpResponseRedirect(reverse('vis_app:prefer', args=(request.session['prefer_id'],)))
 
             else:
-                next_prefer_id = prefer_id + 1
+                request.session['prefer_id'] = prefer_id - 1
+                next_prefer_id = request.session['prefer_id'] + 1
                 type_detail = get_object_or_404(Vis_Choice_Test, pk=request.session['vis_id'])
                 context = {'next_prefer_id':next_prefer_id, 'type_detail':type_detail}
                 return render(request, 'prefer_stacked.html', context)
@@ -350,19 +353,20 @@ def prefer(request, prefer_id):
             if request.method == "POST":
                 vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
                 vis_prefer = Vis_prefer()
-                vis_prefer.vis_prefer_id = str(prefer_id + str(request.user))
+                vis_prefer.vis_prefer_id = str(str(prefer_id) + str(request.user))
                 vis_prefer.prefer_id = prefer_id
                 vis_prefer.user_id = request.user.username
                 vis_prefer.prefer = request.POST.get('option-list','')
                 vis_prefer.v_task = vis_choice_test.v_task
                 vis_prefer.vis_type = vis_choice_test.vis_1
                 vis_prefer.save()
-                request.session['prefer_id'] = prefer_id
-
-                return HttpResponseRedirect(reverse('vis_app:prefer', args=(prefer_id,)))
+                request.session['prefer_id'] = prefer_id + 1
+            
+                return HttpResponseRedirect(reverse('vis_app:prefer', args=(request.session['prefer_id'],)))
 
             else:
-                next_prefer_id = prefer_id + 1
+                request.session['prefer_id'] = prefer_id - 1
+                next_prefer_id = request.session['prefer_id'] + 1
                 type_detail = get_object_or_404(Vis_Choice_Test, pk=request.session['vis_id'])
                 context = {'next_prefer_id':next_prefer_id, 'type_detail':type_detail}
                 return render(request, 'prefer_multi_bar.html', context)
@@ -371,7 +375,7 @@ def prefer(request, prefer_id):
             if request.method == "POST":
                 vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
                 vis_prefer = Vis_prefer()
-                vis_prefer.vis_prefer_id = str(prefer_id + str(request.user))
+                vis_prefer.vis_prefer_id = str(str(prefer_id) + str(request.user))
                 vis_prefer.prefer_id = prefer_id
                 vis_prefer.user_id = request.user.username
                 vis_prefer.prefer = request.POST.get('option-list','')
@@ -379,10 +383,13 @@ def prefer(request, prefer_id):
                 vis_prefer.vis_type = vis_choice_test.vis_1
                 vis_prefer.save()
 
-                return HttpResponseRedirect(reverse('vis_app:prefer', args=(prefer_id,)))
+                request.session['prefer_id'] = prefer_id + 1 
+            
+                return HttpResponseRedirect(reverse('vis_app:prefer', args=(request.session['prefer_id'],)))
 
             else:
-                next_prefer_id = prefer_id + 1
+                request.session['prefer_id'] = prefer_id - 1
+                next_prefer_id = request.session['prefer_id'] + 1
                 type_detail = get_object_or_404(Vis_Choice_Test, pk=request.session['vis_id'])
                 context = {'next_prefer_id':next_prefer_id, 'type_detail':type_detail}
                 return render(request, 'prefer_stacked_100.html', context)
@@ -391,19 +398,20 @@ def prefer(request, prefer_id):
             if request.method == "POST":
                 vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
                 vis_prefer = Vis_prefer()
-                vis_prefer.vis_prefer_id = str(prefer_id + str(request.user))
+                vis_prefer.vis_prefer_id = str(str(prefer_id) + str(request.user))
                 vis_prefer.prefer_id = prefer_id
                 vis_prefer.user_id = request.user.username
                 vis_prefer.prefer = request.POST.get('option-list','')
                 vis_prefer.v_task = vis_choice_test.v_task
                 vis_prefer.vis_type = vis_choice_test.vis_1
                 vis_prefer.save()
-                request.session['prefer_id'] = prefer_id
-
-                return HttpResponseRedirect(reverse('vis_app:prefer', args=(prefer_id,)))
+                request.session['prefer_id'] = prefer_id + 1
+            
+                return HttpResponseRedirect(reverse('vis_app:prefer', args=(request.session['prefer_id'],)))
 
             else:
-                next_prefer_id = prefer_id + 1
+                request.session['prefer_id'] = prefer_id - 1
+                next_prefer_id = request.session['prefer_id'] + 1
                 type_detail = get_object_or_404(Vis_Choice_Test, pk=request.session['vis_id'])
                 context = {'next_prefer_id':next_prefer_id, 'type_detail':type_detail}
                 return render(request, 'prefer_multi_pie.html', context)
@@ -412,19 +420,20 @@ def prefer(request, prefer_id):
             if request.method == "POST":
                 vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
                 vis_prefer = Vis_prefer()
-                vis_prefer.vis_prefer_id = str(prefer_id + str(request.user))
+                vis_prefer.vis_prefer_id = str(str(prefer_id) + str(request.user))
                 vis_prefer.prefer_id = prefer_id
                 vis_prefer.user_id = request.user.username
                 vis_prefer.prefer = request.POST.get('option-list','')
                 vis_prefer.v_task = vis_choice_test.v_task
                 vis_prefer.vis_type = vis_choice_test.vis_1
                 vis_prefer.save()
-                request.session['prefer_id'] = prefer_id
-
-                return HttpResponseRedirect(reverse('vis_app:prefer', args=(prefer_id,)))
+                request.session['prefer_id'] = prefer_id + 1
+            
+                return HttpResponseRedirect(reverse('vis_app:prefer', args=(request.session['prefer_id'],)))
 
             else:
-                next_prefer_id = prefer_id + 1
+                request.session['prefer_id'] = prefer_id - 1
+                next_prefer_id = request.session['prefer_id'] + 1
                 type_detail = get_object_or_404(Vis_Choice_Test, pk=request.session['vis_id'])
                 context = {'next_prefer_id':next_prefer_id, 'type_detail':type_detail}
                 return render(request, 'prefer_tree.html', context)
