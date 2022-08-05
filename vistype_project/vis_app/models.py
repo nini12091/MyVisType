@@ -94,7 +94,8 @@ class Choice(models.Model):
         verbose_name_plural = '선택 결과'
 
 class Vis_prefer(models.Model):
-    prefer_id = models.SmallIntegerField(verbose_name='prefer_id', primary_key=True)      
+    vis_prefer_id = models.CharField(verbose_name='vis_prefer_id', primary_key=True, max_length=256)  
+    prefer_id = models.SmallIntegerField(verbose_name='prefer_id')      
     user_id = models.CharField(verbose_name='사용자', max_length=256)
     vis_type = models.CharField(max_length=256, verbose_name='시각화 종류')
     v_task = models.CharField(max_length=256, verbose_name='task')

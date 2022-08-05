@@ -330,6 +330,7 @@ def prefer(request, prefer_id):
             if request.method == "POST":
                 vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
                 vis_prefer = Vis_prefer()
+                vis_prefer.vis_prefer_id = str(str(request.session['prefer_id']) + str(request.user))
                 vis_prefer.prefer_id = prefer_id
                 vis_prefer.user_id = request.user.username
                 vis_prefer.prefer = request.POST.get('option-list','')
@@ -349,6 +350,7 @@ def prefer(request, prefer_id):
             if request.method == "POST":
                 vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
                 vis_prefer = Vis_prefer()
+                vis_prefer.vis_prefer_id = str(str(request.session['prefer_id']) + str(request.user))
                 vis_prefer.prefer_id = prefer_id
                 vis_prefer.user_id = request.user.username
                 vis_prefer.prefer = request.POST.get('option-list','')
@@ -369,6 +371,7 @@ def prefer(request, prefer_id):
             if request.method == "POST":
                 vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
                 vis_prefer = Vis_prefer()
+                vis_prefer.vis_prefer_id = str(str(request.session['prefer_id']) + str(request.user))
                 vis_prefer.prefer_id = prefer_id
                 vis_prefer.user_id = request.user.username
                 vis_prefer.prefer = request.POST.get('option-list','')
@@ -388,6 +391,7 @@ def prefer(request, prefer_id):
             if request.method == "POST":
                 vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
                 vis_prefer = Vis_prefer()
+                vis_prefer.vis_prefer_id = str(str(request.session['prefer_id']) + str(request.user))
                 vis_prefer.prefer_id = prefer_id
                 vis_prefer.user_id = request.user.username
                 vis_prefer.prefer = request.POST.get('option-list','')
@@ -408,6 +412,7 @@ def prefer(request, prefer_id):
             if request.method == "POST":
                 vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
                 vis_prefer = Vis_prefer()
+                vis_prefer.vis_prefer_id = str(str(request.session['prefer_id']) + str(request.user))
                 vis_prefer.prefer_id = prefer_id
                 vis_prefer.user_id = request.user.username
                 vis_prefer.prefer = request.POST.get('option-list','')
