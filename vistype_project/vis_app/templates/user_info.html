@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="p-4 mb-4 rounded-4 type-content" style="margin-top: 2rem; border: 3px solid; border-color: gainsboro;">
+    <p class="lead mb-2" style="text-align: center; color: black; ">본 테스트를 마치기 전, 아래의 설문을 작성해주시길 바랍니다. </br>수집된 데이터는 연구 목적으로만 활용될 예정입니다.</p>
+  </div>
+  <div class="p-4 mb-4 rounded-4 type-content" style="border: 3px solid; border-color: gainsboro;">
+    <form method="post" action="{% url 'vis_app:user_info' %}">
+      {% csrf_token %}
+        <div class="user-detail">
+            <p class="user-choice" style="font-size: 1.2rem; padding-left: 3rem; padding-top: 0.5rem;">
+                1. 사용자의 연령대를 선택해주세요.
+            </p>
+            <label for="user-age1" style="padding-left: 4.5rem;"><input type="radio" name="user-age" id="user-age1" value="10대" required> 10대</label>
+            <label for="user-age2" style="padding-left: 2rem;"><input type="radio" name="user-age" id="user-age2" value="20대"> 20대</label>
+            <label for="user-age3" style="padding-left: 2rem;"><input type="radio" name="user-age" id="user-age3" value="30대"> 30대</label>
+            <label for="user-age4" style="padding-left: 2rem;"><input type="radio" name="user-age" id="user-age4" value="40대"> 40대</label>
+            <label for="user-age5" style="padding-left: 2rem;"><input type="radio" name="user-age" id="user-age5" value="50대 이상"> 50대 이상</label>
+        </div>
+        <div class="user-detail" >
+          <p class="user-choice" style="font-size: 1.2rem; padding-left: 3rem; padding-top: 1.5rem;">
+              2. 사용자의 성별을 선택해주세요.
+          </p>
+          <label for="sex1" style="padding-left: 4.5rem;"><input type="radio" name="sex" id="sex1" value="남성" required>&nbsp;남성</label>
+          <label for="sex2" style="padding-left: 2rem;"><input type="radio" name="sex" id="sex2" value="여성" required>&nbsp;여성</label>
+        </div>
+        <div class="user-detail" >
+          <p class="user-choice" style="font-size: 1.2rem; padding-left: 3rem; padding-top: 1.5rem;">
+              3. 사용자의 학과(전공)을 입력해주세요.
+          </p>
+          <label for="user-major-label" style="padding-left: 4.5rem;"><input type="text" name="user-major" id="user-major-label" placeholder="ex) 컴퓨터공학과" onclick="this.placeholder = ''" onblur="this.placeholder = 'ex) 컴퓨터공학과'" required></label>
+        </div>
+        <div class="user-detail" style="font-size: 1.2rem; padding-left: 3rem; padding-top: 1.5rem;">
+            <p class="user-choice">
+                4. 사용자의 최종 학력을 선택해주세요.
+            </p>
+            <div class="list-type" style="font-size: 1rem;">
+                <label for="user-education1" style="padding-left: 2rem; padding-bottom: 0.5rem;"><input type="radio" name="user-education" id="user-education1" value="초등학교 졸업"> 초등학교 졸업</label>
+            </div>
+            <div class="list-type" style="font-size: 1rem;">
+                <label for="user-education2" style="padding-left: 2rem; padding-bottom: 0.5rem;"><input type="radio" name="user-education" id="user-education2" value="중학교 졸업"> 중학교 졸업</label>
+            </div>
+            <div class="list-type" style="font-size: 1rem;">
+                <label for="user-education3" style="padding-left: 2rem; padding-bottom: 0.5rem;"><input type="radio" name="user-education" id="user-education3" value="고등학교 졸업"> 고등학교 졸업</label>
+            </div>
+            <div class="list-type" style="font-size: 1rem;">
+                <label for="user-education4" style="padding-left: 2rem; padding-bottom: 0.5rem;"><input type="radio" name="user-education" id="user-education4" value="대학교 재학"> 대학교 재학</label>
+            </div>
+            <div class="list-type" style="font-size: 1rem;">
+                <label for="user-education5" style="padding-left: 2rem; padding-bottom: 0.5rem;"><input type="radio" name="user-education" id="user-education5" value="대학교 졸업"> 대학교 졸업</label>
+            </div>
+            <div class="list-type" style="font-size: 1rem;">
+                <label for="user-education6" style="padding-left: 2rem; padding-bottom: 0.5rem;"><input type="radio" name="user-education" id="user-education6" value="대학원 재학"> 대학원 재학</label>
+            </div>
+            <div class="list-type" style="font-size: 1rem;">
+                <label for="user-education7" style="padding-left: 2rem; padding-bottom: 0.5rem;"><input type="radio" name="user-education" id="user-education7" value="대학원 졸업"> 대학원 졸업</label>
+            </div>
+        </div>
+        <div style="text-align: center;">
+          <button class="btn btn-lg me-md-2" style="background-color: grey; color: white; padding-left: 6rem; padding-right: 6rem;" value="submit" role="button">제출</button>
+        </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

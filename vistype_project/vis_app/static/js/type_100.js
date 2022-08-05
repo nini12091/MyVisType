@@ -125,7 +125,7 @@ svg10.append("text")
   .attr("dy", "1em") 
   .attr("font-size", "15px")
   .style("text-anchor", "middle")
-  .text("사망 수");
+  .text("사망 수(명)");
 
 // Show the bars
 svg10.append("g")

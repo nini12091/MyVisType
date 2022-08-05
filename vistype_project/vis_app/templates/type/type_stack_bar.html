@@ -17,7 +17,7 @@
         <p class="lead mb-2" style="text-align: center; color: black; font-weight: 400;">Q. {{type_detail.v_question}} 찾기</p>
     </div>
     <div class="p-4 mb-4 rounded-4 type-content" style="border: 3px solid; border-color: gainsboro;">
-        <form action="{% url 'vis_app:type' next_vis_id %}" method="POST">
+        <form action="{% url 'vis_app:type' vis_id %}" method="POST">
             {% csrf_token %}
             <h5 class="title" style="margin-left: 3rem;">
                 {{type_detail.vis_title}}

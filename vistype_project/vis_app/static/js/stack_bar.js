@@ -106,7 +106,7 @@ svg.append("text")
   .attr("dy", "1em") 
   .attr("font-size", "15px")
   .style("text-anchor", "middle")
-  .text("이산화탄소 배출량");
+  .text("이산화탄소 배출량(ppmv)");
 
 // Show the bars
 svg.append("g")

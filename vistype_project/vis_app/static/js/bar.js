@@ -111,7 +111,7 @@ svg.append("text")
   .attr("dy", "1em") 
   .attr("font-size", "15px")
   .style("text-anchor", "middle")
-  .text("판매량");
+  .text("판매량(개)");
 
   // Show the bars
 svg.append("g")

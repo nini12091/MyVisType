@@ -64,7 +64,20 @@ svg
 .attr("font-size", "14px")
 .attr("fill", "black")
 
-// Add title for the 6 groups
+// and to add the text labels
+svg
+.selectAll("vals")
+.data(root.leaves())
+.enter()
+.append("text")
+.attr("x", function(d){ return d.x0+5})    // +10 to adjust position (more right)
+.attr("y", function(d){ return d.y0+30})    // +20 to adjust position (lower)
+.text(function(d){ return d.data.value + 'kg'})
+.attr("font-size", "13px")
+.attr("fill", "black")
+
+
+// Add title for the 4 groups
 svg
 .selectAll("titles")
 .data(root.descendants().filter(function(d){return d.depth==1}))

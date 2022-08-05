@@ -15,23 +15,40 @@
     <div class="notice">
         <p class="lead" style="margin-top: 1rem;">* 시각화 테스트 문제는 시간이 측정되고 있으니 문제를 완료하시면 다음 버튼을 '<span style="color: orangered;">바로</span>’ 눌러주시길 바랍니다.</p>
     </div>
-    <div class="chart-content">
-        <h2 class="chart-title">
-            {{ test_detail.v_title }}
-        </h2>
-        <div id="pie" class="chart" ></div>
-            <script src="{% static 'js/pie.js' %}"></script>
+    <h2 class="chart-title" style="margin-bottom: 2rem;">
+      {{ test_detail.v_title }}
+    </h2>
+    <div class="pie-chart-content">
+      <div class="test_pie_raw">
+        <div id="type_pie1" class="type-vis1">
+            <script src="{% static 'js/type_pie1.js' %}"></script></br>
+            <p style="text-decoration: underline; text-align: center;">대한민국</p>
         </div>
-    </div>
-    <div class="quiz-content">
-        <div class="answer-content">
+        <div id="type_pie2" class="type-vis1">
+            <script src="{% static 'js/type_pie2.js' %}"></script>
+            <p style="text-decoration: underline; text-align: center;">독일</p>
+        </div>
+        <div id="type_pie3" class="type-vis1">
+            <script src="{% static 'js/type_pie3.js' %}"></script>
+            <p style="text-decoration: underline; text-align: center;">미국</p>
+        </div>
+        <div id="type_pie4" class="type-vis1">
+            <script src="{% static 'js/type_pie4.js' %}"></script>
+            <p style="text-decoration: underline; text-align: center;">영국</p>
+        </div>
+        <div id="type_pie5" class="type-vis1">
+            <script src="{% static 'js/type_pie5.js' %}"></script>
+            <p style="text-decoration: underline; text-align: center;">일본</p>
+        </div>
+      </div>
+        <div class="pie-answer-content">
           <h3 class="quiz-title"> 
             {{ test_detail.test_id}}번. 
             {{ test_detail.title }}
           </h3>
           <form action="{% url 'vis_app:test' next_test_id %}" method="POST">
             {% csrf_token %}
-            <div class="answer-list">
+            <div class="pie-answer-list">
               <div class="answer-set">
                 <input type="radio" name="answer" class="answer-radio" id="answer1" value="{{ test_detail.examples_1 }}" required/>
                 <label for="answer1" class="answer-label">{{ test_detail.examples_1 }}</label>

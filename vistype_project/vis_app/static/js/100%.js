@@ -118,7 +118,7 @@ svg.append("text")
   .attr("dy", "1em") 
   .attr("font-size", "15px")
   .style("text-anchor", "middle")
-  .text("식품 소비율");
+  .text("식품 소비율(%)");
 
 // Show the bars
 svg.append("g")

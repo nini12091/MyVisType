@@ -1,5 +1,6 @@
+import re
 from django.shortcuts import render
-from .models import Vis_test, Answer, Vis_Choice_Test, Choice
+from .models import User_info, Vis_test, Answer, Vis_Choice_Test, Choice, Vis_prefer
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
@@ -74,7 +75,7 @@ def test(request, test_id):
             context = {'next_test_id':next_test_id, 'test_detail':test_detail}
             return render(request, 'test/test_bar.html', context)
 
-    elif 8 < test_id <= 11:
+    elif 8 < test_id <= 12:
         if request.method == "POST":
             termiate_time = time.time()
             result_time = int (termiate_time - request.session['start_time'])
@@ -105,7 +106,7 @@ def test(request, test_id):
             context = {'next_test_id':next_test_id, 'test_detail':test_detail}
             return render(request, 'test/test_pie.html', context)
 
-    elif 11 < test_id <= 15:
+    elif 12 < test_id <= 16:
         if request.method == "POST":
             termiate_time = time.time()
             result_time = int (termiate_time - request.session['start_time'])
@@ -136,7 +137,7 @@ def test(request, test_id):
             context = {'next_test_id':next_test_id, 'test_detail':test_detail}
             return render(request, 'test/test_stack_bar.html', context)
 
-    elif 15 < test_id <= 17:
+    elif 16 < test_id <= 19:
         if request.method == "POST":
             termiate_time = time.time()
             result_time = int (termiate_time - request.session['start_time'])
@@ -167,7 +168,7 @@ def test(request, test_id):
             context = {'next_test_id':next_test_id, 'test_detail':test_detail}
             return render(request, 'test/test_tree.html', context)
 
-    elif 17 < test_id <= 19:
+    elif 19 < test_id <= 21:
         if request.method == "POST":
             termiate_time = time.time()
             result_time = int (termiate_time - request.session['start_time'])
@@ -188,7 +189,7 @@ def test(request, test_id):
             answer.time = result_time
             answer.save()
             
-            if test_id == 19:
+            if test_id == 21:
                 return HttpResponseRedirect(reverse('vis_app:type', args=(1,)))
             else:
                 return HttpResponseRedirect(reverse('vis_app:test', args=(test_id,)))
@@ -205,7 +206,7 @@ def test(request, test_id):
        return HttpResponseRedirect(reverse('vis_app:type', args=(1,)))
 
 def type(request, vis_id):
-    if vis_id <= 4:
+    if vis_id <= 1:
         if request.method == "POST":
             termiate_time = time.time()
             result_time = int (termiate_time - request.session['start_time'])
@@ -223,14 +224,44 @@ def type(request, vis_id):
             choice.v_reason = request.POST.get('reason','')
             choice.time = result_time
             choice.save()
-            return HttpResponseRedirect(reverse('vis_app:type', args=(vis_id,)))
+            return HttpResponseRedirect(reverse('vis_app:prefer', args=(1,)))
         else:
             request.session['vis_id'] = vis_id
+            vis_id
             start_time = time.time()
             request.session['start_time'] = start_time
-            next_vis_id = vis_id + 1
             type_detail = get_object_or_404(Vis_Choice_Test, pk=vis_id)
-            context = {'next_vis_id':next_vis_id, 'type_detail':type_detail}
+            context = {'vis_id':vis_id, 'type_detail':type_detail}
+            return render(request, 'type/type_stack_bar.html', context)
+
+    elif 1 < vis_id <= 4:
+        if request.method == "POST":
+            termiate_time = time.time()
+            result_time = int (termiate_time - request.session['start_time'])
+            vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
+            choice = Choice()
+            choice.choice_id = str(str(request.session['vis_id']) + str(request.user))
+            choice.user_id = request.user.username
+            choice.set_number = vis_choice_test.set_number
+            select = request.POST.get('option-list','')
+            if select == 'option1':
+                choice.choice_type = vis_choice_test.vis_1
+            else:
+                choice.choice_type = vis_choice_test.vis_2
+            choice.v_task = vis_choice_test.v_task
+            choice.v_reason = request.POST.get('reason','')
+            choice.time = result_time
+            choice.save()
+            request.session['prefer_id'] = request.session['prefer_id'] + 2
+            return HttpResponseRedirect(reverse('vis_app:prefer', args=(request.session['prefer_id'],)))
+
+        else:
+            request.session['vis_id'] = vis_id
+            vis_id
+            start_time = time.time()
+            request.session['start_time'] = start_time
+            type_detail = get_object_or_404(Vis_Choice_Test, pk=vis_id)
+            context = {'vis_id':vis_id, 'type_detail':type_detail}
             return render(request, 'type/type_stack_bar.html', context)
 
     elif 4 < vis_id <= 8:
@@ -251,7 +282,8 @@ def type(request, vis_id):
             choice.v_reason = request.POST.get('reason','')
             choice.time = result_time
             choice.save()
-            return HttpResponseRedirect(reverse('vis_app:type', args=(vis_id,)))
+            request.session['prefer_id'] = request.session['prefer_id'] + 2
+            return HttpResponseRedirect(reverse('vis_app:prefer', args=(request.session['prefer_id'],)))
         else:
             request.session['vis_id'] = vis_id
             start_time = time.time()
@@ -279,10 +311,8 @@ def type(request, vis_id):
             choice.v_reason = request.POST.get('reason','')
             choice.time = result_time
             choice.save()
-            if vis_id == 13:
-                return HttpResponseRedirect(reverse('vis_app:finish'))
-            else:
-                return HttpResponseRedirect(reverse('vis_app:type', args=(vis_id,)))
+            request.session['prefer_id'] = request.session['prefer_id'] + 2
+            return HttpResponseRedirect(reverse('vis_app:prefer', args=(request.session['prefer_id'],)))
         else:
             request.session['vis_id'] = vis_id
             start_time = time.time()
@@ -293,7 +323,126 @@ def type(request, vis_id):
             return render(request, 'type/type_stack_tree.html', context)
 
     else:
-       return HttpResponseRedirect(reverse('vis_app:finish'))
+       return HttpResponseRedirect(reverse('vis_app:user_info'))
+
+def prefer(request, prefer_id):
+        if prefer_id == 1 or prefer_id == 4 or prefer_id == 7 or prefer_id == 10:
+            if request.method == "POST":
+                vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
+                vis_prefer = Vis_prefer()
+                vis_prefer.prefer_id = prefer_id
+                vis_prefer.user_id = request.user.username
+                vis_prefer.prefer = request.POST.get('option-list','')
+                vis_prefer.v_task = vis_choice_test.v_task
+                vis_prefer.vis_type = vis_choice_test.vis_1
+                vis_prefer.save()
+
+                return HttpResponseRedirect(reverse('vis_app:prefer', args=(prefer_id,)))
+
+            else:
+                next_prefer_id = prefer_id + 1
+                type_detail = get_object_or_404(Vis_Choice_Test, pk=request.session['vis_id'])
+                context = {'next_prefer_id':next_prefer_id, 'type_detail':type_detail}
+                return render(request, 'prefer_stacked.html', context)
+
+        elif prefer_id == 2 or prefer_id == 5 or prefer_id == 8 or prefer_id == 11:
+            if request.method == "POST":
+                vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
+                vis_prefer = Vis_prefer()
+                vis_prefer.prefer_id = prefer_id
+                vis_prefer.user_id = request.user.username
+                vis_prefer.prefer = request.POST.get('option-list','')
+                vis_prefer.v_task = vis_choice_test.v_task
+                vis_prefer.vis_type = vis_choice_test.vis_1
+                vis_prefer.save()
+                request.session['prefer_id'] = prefer_id
+
+                return HttpResponseRedirect(reverse('vis_app:prefer', args=(prefer_id,)))
+
+            else:
+                next_prefer_id = prefer_id + 1
+                type_detail = get_object_or_404(Vis_Choice_Test, pk=request.session['vis_id'])
+                context = {'next_prefer_id':next_prefer_id, 'type_detail':type_detail}
+                return render(request, 'prefer_multi_bar.html', context)
+
+        elif prefer_id == 13 or prefer_id == 16 or prefer_id == 19 or prefer_id == 22:
+            if request.method == "POST":
+                vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
+                vis_prefer = Vis_prefer()
+                vis_prefer.prefer_id = prefer_id
+                vis_prefer.user_id = request.user.username
+                vis_prefer.prefer = request.POST.get('option-list','')
+                vis_prefer.v_task = vis_choice_test.v_task
+                vis_prefer.vis_type = vis_choice_test.vis_1
+                vis_prefer.save()
+
+                return HttpResponseRedirect(reverse('vis_app:prefer', args=(prefer_id,)))
+
+            else:
+                next_prefer_id = prefer_id + 1
+                type_detail = get_object_or_404(Vis_Choice_Test, pk=request.session['vis_id'])
+                context = {'next_prefer_id':next_prefer_id, 'type_detail':type_detail}
+                return render(request, 'prefer_stacked_100.html', context)
+
+        elif prefer_id == 14 or prefer_id == 17 or prefer_id == 20 or prefer_id == 23:
+            if request.method == "POST":
+                vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
+                vis_prefer = Vis_prefer()
+                vis_prefer.prefer_id = prefer_id
+                vis_prefer.user_id = request.user.username
+                vis_prefer.prefer = request.POST.get('option-list','')
+                vis_prefer.v_task = vis_choice_test.v_task
+                vis_prefer.vis_type = vis_choice_test.vis_1
+                vis_prefer.save()
+                request.session['prefer_id'] = prefer_id
+
+                return HttpResponseRedirect(reverse('vis_app:prefer', args=(prefer_id,)))
+
+            else:
+                next_prefer_id = prefer_id + 1
+                type_detail = get_object_or_404(Vis_Choice_Test, pk=request.session['vis_id'])
+                context = {'next_prefer_id':next_prefer_id, 'type_detail':type_detail}
+                return render(request, 'prefer_multi_pie.html', context)
+
+        elif prefer_id == 25 or prefer_id == 27 or prefer_id == 29 or prefer_id == 31:
+            if request.method == "POST":
+                vis_choice_test = Vis_Choice_Test.objects.get(pk=request.session['vis_id'])
+                vis_prefer = Vis_prefer()
+                vis_prefer.prefer_id = prefer_id
+                vis_prefer.user_id = request.user.username
+                vis_prefer.prefer = request.POST.get('option-list','')
+                vis_prefer.v_task = vis_choice_test.v_task
+                vis_prefer.vis_type = vis_choice_test.vis_1
+                vis_prefer.save()
+                request.session['prefer_id'] = prefer_id
+
+                return HttpResponseRedirect(reverse('vis_app:prefer', args=(prefer_id,)))
+
+            else:
+                next_prefer_id = prefer_id + 1
+                type_detail = get_object_or_404(Vis_Choice_Test, pk=request.session['vis_id'])
+                context = {'next_prefer_id':next_prefer_id, 'type_detail':type_detail}
+                return render(request, 'prefer_tree.html', context)
+        
+        elif prefer_id == 32:
+            return HttpResponseRedirect(reverse('vis_app:user_info'))
+
+        else:
+            request.session['vis_id'] = request.session['vis_id'] + 1
+            return HttpResponseRedirect(reverse('vis_app:type', args=(request.session['vis_id'],)))
+
+def user_info(request):
+    if request.method == "POST":
+        user_info = User_info()
+        user_info.user_id = request.user.username
+        user_info.sex = request.POST.get('sex','')
+        user_info.age = request.POST.get('user-age','')
+        user_info.major = request.POST.get('user-major','')
+        user_info.education = request.POST.get('user-education','') 
+        user_info.save()
+        return HttpResponseRedirect(reverse('vis_app:finish'))
+    else:
+        return render(request, 'user_info.html')
 
 def finish(request):
 

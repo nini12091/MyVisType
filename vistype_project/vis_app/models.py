@@ -1,6 +1,22 @@
+from os import major
 from django.db import models
 
 # Create your models here.
+
+class User_info(models.Model):    
+    user_id = models.CharField(verbose_name='사용자', max_length=256, primary_key=True)
+    sex = models.CharField(max_length=256, verbose_name='성별')
+    age = models.CharField(max_length=256, verbose_name='나이')
+    major = models.CharField(max_length=256, verbose_name='전공')
+    education = models.CharField(max_length=256, verbose_name='최종학력')
+
+    def __str__(self):
+        return str(self.user_id) + ' - ' + str(self.major)
+
+    class Meta:
+        db_table = 'User_info'
+        verbose_name = '사용자 정보'
+        verbose_name_plural = '사용자 정보' 
 
 class Vis_test(models.Model):
     test_id = models.SmallIntegerField(verbose_name='test_id', primary_key=True)
@@ -76,3 +92,18 @@ class Choice(models.Model):
         db_table = 'Vis_Choice_Result'
         verbose_name = '선택 결과'
         verbose_name_plural = '선택 결과'
+
+class Vis_prefer(models.Model):
+    prefer_id = models.SmallIntegerField(verbose_name='prefer_id', primary_key=True)      
+    user_id = models.CharField(verbose_name='사용자', max_length=256)
+    vis_type = models.CharField(max_length=256, verbose_name='시각화 종류')
+    v_task = models.CharField(max_length=256, verbose_name='task')
+    prefer = models.IntegerField(verbose_name='정답 선호도')
+
+    def __str__(self):
+        return str(self.user_id) + ' - ' + str(self.vis_type) + ' - ' + str(self.v_task)
+
+    class Meta:
+        db_table = 'Vis_prefer'
+        verbose_name = '정답 선호도 결과'
+        verbose_name_plural = '정답 선호도 결과'    
