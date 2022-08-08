@@ -497,7 +497,7 @@ def exportcsv_type(request):
     return response
 
 def exportcsv_prefer(request):
-    resultdata = Choice.objects.all()
+    resultdata = Vis_prefer.objects.all()
     response = HttpResponse('text/csv')
     response['Content-Disposition'] = 'attachment; filename=prefer_data.csv'
     writer = csv.writer(response)
