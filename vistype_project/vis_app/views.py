@@ -466,7 +466,7 @@ def finish(request):
 def exportcsv_user(request):
     resultdata = User_info.objects.all()
     response = HttpResponse('text/csv')
-    response['Content-Disposition'] = 'attachment; filename=test_data.csv'
+    response['Content-Disposition'] = 'attachment; filename=user_data.csv'
     writer = csv.writer(response)
     writer.writerow(['user_id', 'sex', 'age', 'major', 'education'])
     results = resultdata.values_list('user_id', 'sex', 'age', 'major', 'education')
@@ -488,7 +488,7 @@ def exportcsv_test(request):
 def exportcsv_type(request):
     resultdata = Choice.objects.all()
     response = HttpResponse('text/csv')
-    response['Content-Disposition'] = 'attachment; filename=test_data.csv'
+    response['Content-Disposition'] = 'attachment; filename=type_data.csv'
     writer = csv.writer(response)
     writer.writerow(['choice_id', 'user_id', 'set_number', 'choice_type', 'v_task','v_reason','time'])
     results = resultdata.values_list('choice_id', 'user_id', 'set_number', 'choice_type', 'v_task','v_reason','time')
@@ -499,7 +499,7 @@ def exportcsv_type(request):
 def exportcsv_prefer(request):
     resultdata = Choice.objects.all()
     response = HttpResponse('text/csv')
-    response['Content-Disposition'] = 'attachment; filename=test_data.csv'
+    response['Content-Disposition'] = 'attachment; filename=prefer_data.csv'
     writer = csv.writer(response)
     writer.writerow(['vis_prefer_id', 'prefer_id', 'user_id', 'vis_type', 'v_task','v_task','prefer'])
     results = resultdata.values_list('vis_prefer_id', 'prefer_id', 'user_id', 'vis_type', 'v_task','v_task','prefer')
