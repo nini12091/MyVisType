@@ -359,7 +359,7 @@ def prefer(request, prefer_id):
                 vis_prefer.user_id = request.user.username
                 vis_prefer.prefer = request.POST.get('option-list','')
                 vis_prefer.v_task = vis_choice_test.v_task
-                vis_prefer.vis_type = vis_choice_test.vis_1
+                vis_prefer.vis_type = vis_choice_test.vis_2
                 vis_prefer.save()
                 request.session['prefer_id'] = prefer_id + 1
             
@@ -404,7 +404,7 @@ def prefer(request, prefer_id):
                 vis_prefer.user_id = request.user.username
                 vis_prefer.prefer = request.POST.get('option-list','')
                 vis_prefer.v_task = vis_choice_test.v_task
-                vis_prefer.vis_type = vis_choice_test.vis_1
+                vis_prefer.vis_type = vis_choice_test.vis_2
                 vis_prefer.save()
                 request.session['prefer_id'] = prefer_id + 1
             
@@ -426,7 +426,7 @@ def prefer(request, prefer_id):
                 vis_prefer.user_id = request.user.username
                 vis_prefer.prefer = request.POST.get('option-list','')
                 vis_prefer.v_task = vis_choice_test.v_task
-                vis_prefer.vis_type = vis_choice_test.vis_1
+                vis_prefer.vis_type = vis_choice_test.vis_2
                 vis_prefer.save()
                 request.session['prefer_id'] = prefer_id + 1
             
