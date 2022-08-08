@@ -1,4 +1,14 @@
 {% extends "base.html" %}
+
+<!-- 뒤로 넘어가기 안되게 하는 기능 -->
+{% block fcback %}
+    <script type="text/javascript">
+        function disableBack() { window.history.forward(); }
+        setTimeout("disableBack()", 0);
+        window.onunload = function () { null };
+    </script> 
+{% endblock %}
+
 {% block content %}
 <div class="container col-xxl-8 px-1 py-5">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">

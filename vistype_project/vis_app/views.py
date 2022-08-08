@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 import time
 import logging
+import csv
 
 # Create your views here.
 
@@ -461,3 +462,48 @@ def user_info(request):
 def finish(request):
 
     return render(request, 'finish.html')
+
+def exportcsv_user(request):
+    resultdata = User_info.objects.all()
+    response = HttpResponse('text/csv')
+    response['Content-Disposition'] = 'attachment; filename=test_data.csv'
+    writer = csv.writer(response)
+    writer.writerow(['user_id', 'sex', 'age', 'major', 'education'])
+    results = resultdata.values_list('user_id', 'sex', 'age', 'major', 'education')
+    for rlt in results:
+        writer.writerow(rlt)
+    return response
+
+def exportcsv_test(request):
+    resultdata = Answer.objects.all()
+    response = HttpResponse('text/csv')
+    response['Content-Disposition'] = 'attachment; filename=test_data.csv'
+    writer = csv.writer(response)
+    writer.writerow(['answer_id', 'user_id', 'test_id', 'v_type', 'v_task','answer','status','time'])
+    results = resultdata.values_list('answer_id', 'user_id', 'test_id', 'v_type', 'v_task','answer','status','time')
+    for rlt in results:
+        writer.writerow(rlt)
+    return response
+
+def exportcsv_type(request):
+    resultdata = Choice.objects.all()
+    response = HttpResponse('text/csv')
+    response['Content-Disposition'] = 'attachment; filename=test_data.csv'
+    writer = csv.writer(response)
+    writer.writerow(['choice_id', 'user_id', 'set_number', 'choice_type', 'v_task','v_reason','time'])
+    results = resultdata.values_list('choice_id', 'user_id', 'set_number', 'choice_type', 'v_task','v_reason','time')
+    for rlt in results:
+        writer.writerow(rlt)
+    return response
+
+def exportcsv_prefer(request):
+    resultdata = Choice.objects.all()
+    response = HttpResponse('text/csv')
+    response['Content-Disposition'] = 'attachment; filename=test_data.csv'
+    writer = csv.writer(response)
+    writer.writerow(['vis_prefer_id', 'prefer_id', 'user_id', 'vis_type', 'v_task','v_task','prefer'])
+    results = resultdata.values_list('vis_prefer_id', 'prefer_id', 'user_id', 'vis_type', 'v_task','v_task','prefer')
+    for rlt in results:
+        writer.writerow(rlt)
+    return response
+

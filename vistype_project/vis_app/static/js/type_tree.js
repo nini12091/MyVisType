@@ -64,6 +64,18 @@ svg2
 .attr("font-size", "14px")
 .attr("fill", "black")
 
+// and to add the text labels
+svg2
+.selectAll("vals")
+.data(root.leaves())
+.enter()
+.append("text")
+.attr("x", function(d){ return d.x0+5})    // +10 to adjust position (more right)
+.attr("y", function(d){ return d.y0+30})    // +20 to adjust position (lower)
+.text(function(d){ return d.data.value + '명'})
+.attr("font-size", "13px")
+.attr("fill", "black")
+
 // Add title for the 6 groups
 svg2
 .selectAll("titles")
