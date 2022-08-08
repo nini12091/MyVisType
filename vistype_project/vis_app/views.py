@@ -501,8 +501,8 @@ def exportcsv_prefer(request):
     response = HttpResponse('text/csv')
     response['Content-Disposition'] = 'attachment; filename=prefer_data.csv'
     writer = csv.writer(response)
-    writer.writerow(['vis_prefer_id', 'prefer_id', 'user_id', 'vis_type', 'v_task','v_task','prefer'])
-    results = resultdata.values_list('vis_prefer_id', 'prefer_id', 'user_id', 'vis_type', 'v_task','v_task','prefer')
+    writer.writerow(['vis_prefer_id', 'prefer_id', 'user_id', 'vis_type', 'v_task','prefer'])
+    results = resultdata.values_list('vis_prefer_id', 'prefer_id', 'user_id', 'vis_type', 'v_task','prefer')
     for rlt in results:
         writer.writerow(rlt)
     return response
